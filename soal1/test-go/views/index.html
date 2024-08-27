@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Country List</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 60px;
+        height: 100vh;
+      }
+      .container {
+        width: 60%;
+        margin: 0 auto;
+        height: 100%;
+        border: 1px solid #ccc;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        overflow: auto;
+      }
+      .header {
+        background-color: #3f51b5;
+        color: white;
+        padding: 10px;
+        font-size: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+      .search-bar {
+        width: 50%;
+        padding: 5px;
+        font-size: 16px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0;
+      }
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      th,
+      td {
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <span>Country List</span>
+        <input
+          type="text"
+          id="search"
+          class="search-bar"
+          placeholder="Search for names..."
+          onkeyup="filterTable()"
+        />
+      </div>
+      <table id="countryTable">
+        <thead>
+          <tr>
+            <th>NAME</th>
+            <th>DIAL CODE</th>
+            <th>ISO CODE</th>
+            <th>Flag</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{range $index, $country := .countries}}
+          <tr>
+            <td>{{.Name}}</td>
+            <td>{{.DialCode}}</td>
+            <td>{{.IsoCode}}</td>
+            <td>
+              <img src="{{.Flag}}" alt="{{.Name}}" width="30" height="20" />
+            </td>
+          </tr>
+          {{end}}
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      // Buat function filter untuk fitur search
+      function filterTable() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById('search');
+        filter = input.value.toUpperCase();
+        table = document.getElementById('countryTable');
+        tr = table.getElementsByTagName('tr');
+
+        for (i = 1; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName('td')[0];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = '';
+            } else {
+              tr[i].style.display = 'none';
+            }
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

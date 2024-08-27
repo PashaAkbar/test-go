@@ -1,0 +1,27 @@
+Diperlukan adanya pointer untuk menunjuk struct Bebek yg dimaksud dengan menambahkan "*" pada setiap function menjadi (b *Bebek) sehingga
+
+type Bebek struct {
+	energi       int
+	hidup        bool
+	bisaTerbang  bool
+	suaraTerbang string
+}
+
+func Mati(b *Bebek) {
+	b.hidup = false
+}
+func Terbang(b *Bebek) {
+	if b.energi > 0 && b.hidup == true && b.bisaTerbang {
+		fmt.Println(b.suaraTerbang)
+		b.energi -= 1
+		if b.energi == 0 {
+			Mati(b)
+		}
+	}
+}
+func Makan(b *Bebek) {
+	if b.energi > 0 && b.hidup == true {
+		b.energi += 1
+	}
+}
+

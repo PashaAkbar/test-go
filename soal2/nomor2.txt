@@ -1,0 +1,3 @@
+Code A
+- Menggunakan variabel size untuk menyimpan hasil dari len(tmp), yang lebih efisien dan lebih jelas.
+- Kode lebih mudah dibaca dan di-maintain karena tidak ada penghitungan berulang yang tidak perlu.
